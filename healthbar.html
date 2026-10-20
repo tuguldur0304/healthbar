@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" class="has-background-black-ter">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealthBar</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+  </head>
+  <body class="has-background-black-ter">
+    <div class="container m-6">
+      <div class="colums">
+        <div class="column is-half is-offset-one-quarter">
+          <div class="box" id="nameBox">
+            <div class="mb-3">Enter your name:</div>
+            <div class="is-flex">
+              <input id="input" class="input mr-4" type="text" />
+              <button class="button" onclick="start()">Start</button>
+            </div>
+          </div>
+
+          <div class="box" id="healthBar" style="display: none">
+            <div id="nameTarget"></div>
+            <progress
+              id="health"
+              class="progress is-success"
+              value="100"
+              max="100"
+            ></progress>
+            <div class="buttons">
+              <div class="mr-3">
+                <button class="button is-danger" onclick="attack()">
+                  Attack
+                </button>
+                <button class="button is-info" onclick="heal()">Heal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function start() {
+        const healthEl = document.getElementById("healthBar");
+        healthEl.style.display = "block";
+
+        const nameEl = document.getElementById("nameBox");
+        nameEl.style.display = "none";
+
+        const inputEl = document.getElementById("input");
+        const myName = inputEl.value;
+
+        document.getElementById("nameTarget").textContent = myName;
+      }
+      const healthEl = document.getElementById("health");
+      const percentageEl = document.getElementById("percentage");
+
+      function attack() {
+        const healthEl = document.getElementById("health");
+        healthEl.value = healthEl.value - 10;
+
+        if (healthEl.value <= 70) {
+          healthEl.className = "progress is-warning";
+        }
+        if (healthEl.value <= 40) {
+          healthEl.className = "progress is-danger";
+        }
+
+        if (healthEl.value <= 0) {
+        }
+      }
+      function heal() {
+        healthEl.value = healthEl.value + 10;
+
+        if (healthEl.value >= 30) {
+          healthEl.className = "progress is-warning";
+        }
+        if (healthEl.value >= 70) {
+          healthEl.className = "progress is-success";
+        }
+      }
+    </script>
+  </body>
+</html>
